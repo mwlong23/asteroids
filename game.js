@@ -22,9 +22,14 @@ function constrainInSpace(entity, space){
   if(entity.pos.x > space.width){ entity.pos.x = 0}
   if(entity.pos.y > space.height){ entity.pos.y = 0}
 }
-function advancePos(ship){
-  ship.pos.y += ship.vel.dy;
-  ship.pos.x += ship.vel.dx;
+function advancePos(entity){
+  entity.pos.y += entity.vel.dy;
+  entity.pos.x += entity.vel.dx;
+}
+
+function applyDrag(entity){
+  entity.vel.dx *= 0.99
+  entity.vel.dy *= 0.99
 }
 
 // Model / State
@@ -40,6 +45,7 @@ let ship = {
 
 function advance(){
   advancePos(ship);
+  applyDrag(ship);
   constrainInSpace(ship, space)
 }
 
