@@ -49,11 +49,13 @@ let ship = {
 let asteroids = [
   {
     pos: { x: 50, y: 50 },
-    dim: { w:55, h: 20 }
+    dim: { w:55, h: 20 },
+    vel: { dx: -1, dy: 2 },
   },
   {
     pos: { x: 200, y: 200 },
-    dim: { w:35, h: 50 }
+    dim: { w:35, h: 50 },
+    vel: { dx: 2, dy: -0.5 },
   }
 ];
 
@@ -62,6 +64,10 @@ function advance(){
   advancePos(ship);
   applyDrag(ship);
   constrainInSpace(ship, space)
+  for(let asteroid of asteroids){
+    advancePos(asteroid)
+    constrainInSpace(asteroid, space)
+  }
 }
 
 function setup() {
