@@ -15,6 +15,11 @@ function drawShip(ship){
 function drawSpaceBoundary(space) {
   rect(0,0, space.width-1, space.height-1);
 }
+
+function drawAsteroid(asteroid){
+  ellipse(asteroid.pos.x, asteroid.pos.y, 
+          asteroid.dim.w, asteroid.dim.h);
+}
 //Physics Helpers
 function constrainInSpace(entity, space){
   if(entity.pos.x < 0){ entity.pos.x = space.width};
@@ -41,6 +46,16 @@ let ship = {
   dir: 0,
   maxSpeed: 10,
 };
+let asteroids = [
+  {
+    pos: { x: 50, y: 50 },
+    dim: { w:55, h: 20 }
+  },
+  {
+    pos: { x: 200, y: 200 },
+    dim: { w:35, h: 50 }
+  }
+];
 
 
 function advance(){
@@ -56,7 +71,9 @@ function setup() {
 function draw() {
   drawSpaceBoundary(space);
   drawShip(ship);
-
+  for(let asteroid of asteroids) {
+    drawAsteroid(asteroid);
+  }
   advance();
 }
 
