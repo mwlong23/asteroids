@@ -50,23 +50,22 @@ let ship = {
   maxSpeed: 10,
 };
 let asteroids = [
-  {
-    pos: { x: 50, y: 50 },
-    dim: { w:55, h: 20 },
-    vel: { dx: -1, dy: 2 },
-    angle: 0,
-    dAngle: 0.05,
 
-  },
-  {
-    pos: { x: 200, y: 200 },
-    dim: { w:35, h: 50 },
-    vel: { dx: 2, dy: -0.5 },
-    angle: 0,
-    dAngle: -0.02,
-  }
+  randomAsteroid(space),
+  randomAsteroid(space),
+  randomAsteroid(space),
+  randomAsteroid(space),
 ];
 
+function randomAsteroid(space){
+  return {
+            pos: { x: Math.random()*space.width, y: Math.random()*space.height },
+            dim: { w: Math.random()*50, h: Math.random()*50 },
+            vel: { dx: Math.random()*2-1, dy: Math.random()*2-1 },
+            angle: 0,
+            dAngle: -0.1*Math.random(),
+          }
+}
 
 function advance(){
   advancePos(ship);
