@@ -1,4 +1,4 @@
-// Helpers 
+// Drawing Helpers 
 function drawShip(ship){
   triangle( 
     ship.pos.x-ship.space.w/2, ship.pos.y+ship.space.h/2, 
@@ -9,24 +9,32 @@ function drawShip(ship){
 function drawSpaceBoundary(space) {
   rect(0,0, space.width-1, space.height-1);
 }
+//Physics Helpers
+function constrainInSpace(entity, space){
+  if(entity.pos.x < 0){ entity.pos.x = space.width};
+  if(entity.pos.y < 0){ entity.pos.y = space.height}
+  if(entity.pos.x > space.width){ entity.pos.x = 0}
+  if(entity.pos.y > space.height){ entity.pos.y = 0}
+}
+function advancePos(ship){
+  ship.pos.y += ship.vel.dy;
+  ship.pos.x += ship.vel.dx;
+}
 
 // Model / State
 let space = {height: 500, width:500};
 let ship = {
   pos: { x: 50, y: 200 },
-  space: { w: 50, h: 100 }
+  vel: { dx: 1, dy: -5 },
+  space: { w: 50, h: 100 },
+  dir: 0,
 };
 
+
 function advance(){
-  ship.pos.y -= 5;
-  if(ship.pos.x < 0){ ship.pos.x = space.width};
-  if(ship.pos.y < 0){ ship.pos.y = space.height}
-  if(ship.pos.x > space.width){ ship.pos.x = 0}
-  if(ship.pos.y > space.height){ ship.pos.y = 0}
+  advancePos(ship);
+  constrainInSpace(ship, space)
 }
-
-
-
 
 function setup() {
   createCanvas(space.width, space.height);
