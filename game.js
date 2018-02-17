@@ -1,9 +1,13 @@
 // Drawing Helpers 
-function drawShip(ship){
+function drawShip(ship){ 
+  let dirTip = ship.dir;
+  let dirL = ship.dir + 2/3*PI;
+  let dirR = ship.dir - 2/3*PI
+  let size = 50;
   triangle( 
-    ship.pos.x-ship.space.w/2, ship.pos.y+ship.space.h/2, 
-    ship.pos.x+ship.space.w/2, ship.pos.y+ship.space.h/2,
-    ship.pos.x,             ship.pos.y - ship.space.h/2)
+    ship.pos.x + size*Math.cos(dirTip), ship.pos.y+size*Math.sin(dirTip), 
+    ship.pos.x + size/2*Math.cos(dirL), ship.pos.y+size/2*Math.sin(dirL),
+    ship.pos.x + size/2*Math.cos(dirR), ship.pos.y+size/2*Math.sin(dirR));
 }
 
 function drawSpaceBoundary(space) {
@@ -25,7 +29,7 @@ function advancePos(ship){
 let space = {height: 500, width:500};
 let ship = {
   pos: { x: 50, y: 200 },
-  vel: { dx: 1, dy: -5 },
+  vel: { dx: 0, dy: 0 },
   space: { w: 50, h: 100 },
   dir: 0,
   maxSpeed: 10,
@@ -50,12 +54,21 @@ function draw() {
 
 function keyPressed() {
   let SPACE_KC = 32
+  let LEFT_KC = 37;
+  let RIGHT_KC = 39;
   switch(keyCode){
     case SPACE_KC: 
       let speedSq = ship.vel.dx * ship.vel.dx + ship.vel.dy*ship.vel.dy;
-      if(speedSq <= ship.maxSpeed * ship.maxSpeed){ // optimization
-        ship.vel.dy -= 1;
-      }
+      // if(speedSq <= ship.maxSpeed * ship.maxSpeed){ // optimization
+        ship.vel.dx += Math.cos(ship.dir);
+        ship.vel.dy += Math.sin(ship.dir);
+      // }
+    break;
+    case LEFT_KC:
+      ship.dir -= 0.3;
+      break;
+    case RIGHT_KC:
+      ship.dir += 0.3;
     break;
   }
 }
