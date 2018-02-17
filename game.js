@@ -18,7 +18,11 @@ let ship = {
 };
 
 function advance(){
-  ship.pos.y -= 1;
+  ship.pos.y -= 5;
+  if(ship.pos.x < 0){ ship.pos.x = space.width};
+  if(ship.pos.y < 0){ ship.pos.y = space.height}
+  if(ship.pos.x > space.width){ ship.pos.x = 0}
+  if(ship.pos.y > space.height){ ship.pos.y = 0}
 }
 
 
