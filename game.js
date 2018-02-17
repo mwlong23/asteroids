@@ -3,11 +3,13 @@ function drawShip(ship){
   let dirTip = ship.dir;
   let dirL = ship.dir + 2/3*PI;
   let dirR = ship.dir - 2/3*PI
-  let size = 50;
+  let len = ship.dim.h/2;
+  let width = ship.dim.w/2;
+
   triangle( 
-    ship.pos.x + size*Math.cos(dirTip), ship.pos.y+size*Math.sin(dirTip), 
-    ship.pos.x + size/2*Math.cos(dirL), ship.pos.y+size/2*Math.sin(dirL),
-    ship.pos.x + size/2*Math.cos(dirR), ship.pos.y+size/2*Math.sin(dirR));
+    ship.pos.x + len*Math.cos(dirTip), ship.pos.y+len*Math.sin(dirTip), 
+    ship.pos.x + width*Math.cos(dirL), ship.pos.y+width*Math.sin(dirL),
+    ship.pos.x + width*Math.cos(dirR), ship.pos.y+width*Math.sin(dirR));
 }
 
 function drawSpaceBoundary(space) {
@@ -30,7 +32,7 @@ let space = {height: 500, width:500};
 let ship = {
   pos: { x: 50, y: 200 },
   vel: { dx: 0, dy: 0 },
-  space: { w: 50, h: 100 },
+  dim: { w: 50, h: 100 },
   dir: 0,
   maxSpeed: 10,
 };
