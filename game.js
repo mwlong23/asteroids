@@ -17,8 +17,11 @@ function drawSpaceBoundary(space) {
 }
 
 function drawAsteroid(asteroid){
-  ellipse(asteroid.pos.x, asteroid.pos.y, 
+  translate(asteroid.pos.x, asteroid.pos.y);
+  rotate(asteroid.angle);
+  ellipse(0,0, 
           asteroid.dim.w, asteroid.dim.h);
+  resetMatrix();
 }
 //Physics Helpers
 function constrainInSpace(entity, space){
@@ -51,11 +54,16 @@ let asteroids = [
     pos: { x: 50, y: 50 },
     dim: { w:55, h: 20 },
     vel: { dx: -1, dy: 2 },
+    angle: 0,
+    dAngle: 0.05,
+
   },
   {
     pos: { x: 200, y: 200 },
     dim: { w:35, h: 50 },
     vel: { dx: 2, dy: -0.5 },
+    angle: 0,
+    dAngle: -0.02,
   }
 ];
 
@@ -67,6 +75,7 @@ function advance(){
   for(let asteroid of asteroids){
     advancePos(asteroid)
     constrainInSpace(asteroid, space)
+    asteroid.angle += asteroid.dAngle;
   }
 }
 
