@@ -23,6 +23,14 @@ function drawAsteroid(asteroid){
           asteroid.dim.w, asteroid.dim.h);
   resetMatrix();
 }
+function drawMissile(missile){
+  translate(missile.pos.x, missile.pos.y);
+  ellipse(0,0, 
+          5, 5);
+  resetMatrix();
+}
+
+
 //Physics Helpers
 function constrainInSpace(entity, space){
   if(entity.pos.x < 0){ entity.pos.x = space.width};
@@ -57,6 +65,8 @@ let asteroids = [
   randomAsteroid(space),
 ];
 
+let missiles = [];
+
 function randomAsteroid(space){
   return {
             pos: { x: Math.random()*space.width, y: Math.random()*space.height },
@@ -76,6 +86,9 @@ function advance(){
     constrainInSpace(asteroid, space)
     asteroid.angle += asteroid.dAngle;
   }
+  for(let missile of missiles) {
+    advancePos(missile)
+  }
 }
 
 function setup() {
@@ -88,17 +101,21 @@ function draw() {
   for(let asteroid of asteroids) {
     drawAsteroid(asteroid);
   }
+  for( let missile of missiles){
+    drawMissile(missile);
+  }
   advance();
 }
 
 function keyPressed() {
-  let SPACE_KC = 32
+  let SPACE_KC = 32;
+  let UP_KC = 38;
   let LEFT_KC = 37;
   let RIGHT_KC = 39;
   switch(keyCode){
-    case SPACE_KC: 
+    case UP_KC: 
       let speedSq = ship.vel.dx * ship.vel.dx + ship.vel.dy*ship.vel.dy;
-      // if(speedSq <= ship.maxSpeed * ship.maxSpeed){ // optimization
+      // if(speedSq d<= ship.maxSpeed * ship.maxSpeed){ // optimization
         ship.vel.dx += Math.cos(ship.dir);
         ship.vel.dy += Math.sin(ship.dir);
       // }
@@ -109,5 +126,10 @@ function keyPressed() {
     case RIGHT_KC:
       ship.dir += 0.3;
     break;
+    case SPACE_KC: 
+      missiles.push({
+        pos: Object.assign({}, ship.pos), // don't alias existing memory
+        vel: { dx: Math.cos(ship.dir)*10, dy: Math.sin(ship.dir)*10},
+      })
   }
 }
