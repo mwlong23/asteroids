@@ -1,3 +1,6 @@
+// import  constrainInSpace  from './physics.js';
+// import * as phys from './physics.js';
+
 // Drawing Helpers 
 function drawShip(ship){ 
   let dirTip = ship.dir;
@@ -29,8 +32,6 @@ function drawMissile(missile){
           5, 5);
   resetMatrix();
 }
-
-
 //Physics Helpers
 function constrainInSpace(entity, space){
   if(entity.pos.x < 0){ entity.pos.x = space.width};
@@ -41,13 +42,12 @@ function constrainInSpace(entity, space){
 function advancePos(entity){
   entity.pos.y += entity.vel.dy;
   entity.pos.x += entity.vel.dx;
-}
+};
 
 function applyDrag(entity){
-  entity.vel.dx *= 0.99
-  entity.vel.dy *= 0.99
-}
-
+  entity.vel.dx *= 0.99;
+  entity.vel.dy *= 0.99;
+};
 // Model / State
 let space = {height: 500, width:500};
 let ship = {
