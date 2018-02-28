@@ -49,7 +49,7 @@ function applyDrag(entity){
   entity.vel.dy *= 0.99;
 };
 // Model / State
-let space = {height: 500, width:500};
+let space = {height: window.innerHeight, width: window.innerWidth- 1};
 let ship = {
   pos: { x: 50, y: 200 },
   vel: { dx: 0, dy: 0 },
