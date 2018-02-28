@@ -28,6 +28,7 @@ function drawAsteroid(asteroid){
 }
 function drawMissile(missile){
   translate(missile.pos.x, missile.pos.y);
+ 
   ellipse(0,0, 
           5, 5);
   resetMatrix();
@@ -100,18 +101,23 @@ function setup() {
 }
 
 function draw() {
+fill(0)
   drawSpaceBoundary(space);
+  fill(255, 100, 50);
   drawShip(ship);
   for(let asteroid of asteroids) {
+    fill(128,128,128);
     drawAsteroid(asteroid);
   }
   for( let missile of missiles){
+    fill(0,255,0)
     drawMissile(missile);
   }
   removeUsedMissiles(missiles);
   advance();
 }
-
+  
+  // Ship Controls
 function keyPressed() {
   let SPACE_KC = 32;
   let UP_KC = 38;
