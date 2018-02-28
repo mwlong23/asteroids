@@ -10,9 +10,9 @@ function drawShip(ship){
   let width = ship.dim.w/2;
 
   triangle( 
-    ship.pos.x + len*Math.cos(dirTip), ship.pos.y+len*Math.sin(dirTip), 
-    ship.pos.x + width*Math.cos(dirL), ship.pos.y+width*Math.sin(dirL),
-    ship.pos.x + width*Math.cos(dirR), ship.pos.y+width*Math.sin(dirR));
+    ship.pos.x + len*Math.cos(dirTip), ship.pos.y + len*Math.sin(dirTip), 
+    ship.pos.x + width*Math.cos(dirL), ship.pos.y + width*Math.sin(dirL),
+    ship.pos.x + width*Math.cos(dirR), ship.pos.y + width*Math.sin(dirR));
 }
 
 function drawSpaceBoundary(space) {
@@ -32,6 +32,10 @@ function drawMissile(missile){
           5, 5);
   resetMatrix();
 }
+
+function removeUsedMissiles(missilesArr){
+  if(missilesArr.length > 15){ missilesArr.shift()}
+}
 //Physics Helpers
 function constrainInSpace(entity, space){
   if(entity.pos.x < 0){ entity.pos.x = space.width};
@@ -49,7 +53,7 @@ function applyDrag(entity){
   entity.vel.dy *= 0.99;
 };
 // Model / State
-let space = {height: window.innerHeight, width: window.innerWidth- 1};
+let space = {height: window.innerHeight, width: window.innerWidth};
 let ship = {
   pos: { x: 50, y: 200 },
   vel: { dx: 0, dy: 0 },
@@ -104,6 +108,7 @@ function draw() {
   for( let missile of missiles){
     drawMissile(missile);
   }
+  removeUsedMissiles(missiles);
   advance();
 }
 
