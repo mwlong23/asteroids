@@ -15,14 +15,27 @@ Your mission is simple, stay alive.
 #### Asteroids is not currently hosted, if you'd like to play the game you'll neeed to run it locally on your computer: 
 
 #### Clone this repo to your desktop using the command in your favorite terminal:
-  ```git clone https://github.com/mwlong23/asteroids.git```
+  ```$ git clone https://github.com/mwlong23/asteroids.git```
 
 Navigate to the project folder:
-  ``` cd asteroids```
+  ```$ cd asteroids```
 
 Launch by opening the html file:
 
-  ```open index.html```
+  ```$ open index.html```
+
+  ## Controls
+
+  #### Keys:
+
+  |Key| Function|
+  |---|---------|
+  | Up Arrow | Accelerate |
+  | Left Arrow | Turn Left |
+  | Right Arrow | turn Right |
+  | Space Bar | Shoot Missile |
+  
+
 
   ## Future Develpoment
 
