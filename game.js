@@ -28,14 +28,14 @@ function drawAsteroid(asteroid){
 }
 function drawMissile(missile){
   translate(missile.pos.x, missile.pos.y);
- 
   ellipse(0,0, 
           5, 5);
   resetMatrix();
 }
 
-function removeUsedMissiles(missilesArr){
-  if(missilesArr.length > 15){ missilesArr.shift()}
+function checkMissileVisible(missile){
+  if(missile.pos.x <= 0 || missile.pos.x >= space.width){ missiles.shift()};
+  if(missile.pos.y <= 0 || missile.pos.y >= space.height){ missiles.shift()}
 }
 //Physics Helpers
 function constrainInSpace(entity, space){
@@ -101,19 +101,30 @@ function setup() {
 }
 
 function draw() {
-fill(0)
+
+  fill(0)
   drawSpaceBoundary(space);
-  fill(255, 100, 50);
+  fill(255,255,255)
+  ellipse(50,50, 50,50)
+  fill(255,100,50);
+  
+  push()
   drawShip(ship);
+  fill(255,0,0)
+  ellipse(ship.pos.x, ship.pos.y, 10, 10)
+  pop();
+
   for(let asteroid of asteroids) {
     fill(128,128,128);
     drawAsteroid(asteroid);
   }
+
   for( let missile of missiles){
     fill(0,255,0)
+    checkMissileVisible(missile)
     drawMissile(missile);
   }
-  removeUsedMissiles(missiles);
+  // removeUsedMissiles(missiles);
   advance();
 }
   
