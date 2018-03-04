@@ -12,9 +12,9 @@ Your mission is simple, stay alive.
 
 ## How to play
 
-####Asteroids is not currently hosted, if you'd like to play the game you'll neeed to run it locally on your computer: 
+#### Asteroids is not currently hosted, if you'd like to play the game you'll neeed to run it locally on your computer: 
 
-####Clone this repo to your desktop using the command in your favorite terminal:
+#### Clone this repo to your desktop using the command in your favorite terminal:
   ```git clone https://github.com/mwlong23/asteroids.git```
 
 Navigate to the project folder:
