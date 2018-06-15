@@ -31,16 +31,19 @@ function drawAsteroid(asteroid){
 }
 function drawMissile(missile){
   translate(missile.pos.x, missile.pos.y);
-  ellipse(0,0, 
-          5, 5);
+  ellipse(0,0, 5, 5);
   resetMatrix();
 }
 
+//garbage collects off screen missiles
 function checkMissileVisible(missile){
   if(missile.pos.x <= 0 || missile.pos.x >= space.width){ missiles.shift()};
   if(missile.pos.y <= 0 || missile.pos.y >= space.height){ missiles.shift()}
 }
+
+//#################
 //Physics Helpers
+//#################
 function constrainInSpace(entity, space){
   if(entity.pos.x < 0){ entity.pos.x = space.width};
   if(entity.pos.y < 0){ entity.pos.y = space.height}
@@ -56,7 +59,11 @@ function applyDrag(entity){
   entity.vel.dx *= 0.99;
   entity.vel.dy *= 0.99;
 };
+
+// #############
 // Model / State
+// #############
+
 let space = {height: window.innerHeight, width: window.innerWidth};
 let ship = {
   pos: { x: 50, y: 200 },
@@ -75,6 +82,7 @@ let asteroids = [
 
 let missiles = [];
 
+// Sets initial state of randomly generated asteroids
 function randomAsteroid(space){
   return {
             pos: { x: Math.random()*space.width, y: Math.random()*space.height },
@@ -85,15 +93,20 @@ function randomAsteroid(space){
           }
 }
 
+// Step function - sets coordinates of next position 
+// before shapes are re rendered
+
 function advance(){
   advancePos(ship);
   applyDrag(ship);
   constrainInSpace(ship, space)
+
   for(let asteroid of asteroids){
     advancePos(asteroid)
     constrainInSpace(asteroid, space)
     asteroid.angle += asteroid.dAngle;
   }
+
   for(let missile of missiles) {
     advancePos(missile)
   }
@@ -103,12 +116,18 @@ function setup() {
   createCanvas(space.width, space.height);
 }
 
+
+// #############
+// Render shapes
+// #############
 function draw() {
 
+  //Draw background
   fill(0)
   drawSpaceBoundary(space);
+
+  //Fills in ship colors
   fill(255,255,255)
-  ellipse(50,50, 50,50)
   fill(255,100,50);
   
   push()
@@ -117,6 +136,7 @@ function draw() {
   ellipse(ship.pos.x, ship.pos.y, 10, 10)
   pop();
 
+  //Draws and colors asteroids
   for(let asteroid of asteroids) {
     fill(128,128,128);
     drawAsteroid(asteroid);
@@ -131,7 +151,7 @@ function draw() {
   advance();
 }
   
-  // Ship Controls
+// Ship Controls
 function keyPressed() {
   let SPACE_KC = 32;
   let UP_KC = 38;
@@ -140,10 +160,8 @@ function keyPressed() {
   switch(keyCode){
     case UP_KC: 
       let speedSq = ship.vel.dx * ship.vel.dx + ship.vel.dy*ship.vel.dy;
-      // if(speedSq d<= ship.maxSpeed * ship.maxSpeed){ // optimization
-        ship.vel.dx += Math.cos(ship.dir);
-        ship.vel.dy += Math.sin(ship.dir);
-      // }
+      ship.vel.dx += Math.cos(ship.dir);
+      ship.vel.dy += Math.sin(ship.dir);
     break;
     case LEFT_KC:
       ship.dir -= 0.3;
