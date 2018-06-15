@@ -1,8 +1,11 @@
-// import  constrainInSpace  from './physics.js';
-// import * as phys from './physics.js';
+//Asteroids with P5js
+//Autor: Mitchell Long
 
 // Drawing Helpers 
-function drawShip(ship){ 
+function drawShip(ship){
+  
+  //keeps track of which direction 
+  //the ship is pointing 
   let dirTip = ship.dir;
   let dirL = ship.dir + 2/3*PI;
   let dirR = ship.dir - 2/3*PI
