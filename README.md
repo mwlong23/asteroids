@@ -33,6 +33,7 @@ Launch by opening the html file:
   | Up Arrow | Accelerate |
   | Left Arrow | Turn Left |
   | Right Arrow | turn Right |
+  | Down Arrow | Decelerate |
   | Space Bar | Shoot Missile |
   
 
