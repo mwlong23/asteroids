@@ -1,0 +1,32 @@
+{
+  "name": "asteroids",
+  "version": "1.0.0",
+  "description": "### _By: Mitch Long_",
+  "private": true,
+  "scripts": {
+    "clean": "rm bundle.js",
+    "develop": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "start:dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwlong23/asteroids.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwlong23/asteroids/issues"
+  },
+  "homepage": "https://github.com/mwlong23/asteroids#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.1",
+    "lodash-es": "^4.17.10",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7"
+  },
+  "dependencies": {}
+}
